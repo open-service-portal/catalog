@@ -1,0 +1,27 @@
+# DNS Record Template
+# Provides XRD and Composition for DNS record management
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: GitRepository
+metadata:
+  name: template-dns-record
+  namespace: flux-system
+spec:
+  interval: 5m
+  url: https://github.com/open-service-portal/template-dns-record
+  ref:
+    branch: main
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: template-dns-record
+  namespace: flux-system
+spec:
+  interval: 5m
+  sourceRef:
+    kind: GitRepository
+    name: template-dns-record
+  path: "./"
+  prune: true
+  targetNamespace: crossplane-system
