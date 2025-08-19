@@ -1,0 +1,28 @@
+# WhoAmI App Template
+# Provides XRD and Compositions for WhoAmI demo application deployment
+# Supports both direct Kubernetes deployment and GitOps workflows
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: template-whoami
+  namespace: flux-system
+spec:
+  interval: 5m0s
+  url: https://github.com/open-service-portal/template-whoami
+  ref:
+    branch: main
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: template-whoami
+  namespace: flux-system
+spec:
+  interval: 5m0s
+  sourceRef:
+    kind: GitRepository
+    name: template-whoami
+  path: "./"
+  prune: true
+  targetNamespace: crossplane-system
