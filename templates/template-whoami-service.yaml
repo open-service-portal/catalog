@@ -1,0 +1,25 @@
+# WhoAmI Service Template Registration
+# Purpose: Register the composition-of-compositions template in the catalog
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: template-whoami-service
+  namespace: flux-system
+spec:
+  interval: 5m
+  path: ./
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: template-whoami-service
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: template-whoami-service
+  namespace: flux-system
+spec:
+  interval: 5m
+  url: https://github.com/open-service-portal/template-whoami-service
+  ref:
+    branch: main
