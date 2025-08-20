@@ -6,3 +6,4 @@ resources:
   - templates/template-dns-record.yaml
   - templates/template-whoami.yaml
   - templates/template-cloudflare-dnsrecord.yaml
+  - templates/template-whoami-service.yaml
