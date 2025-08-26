@@ -22,6 +22,6 @@ spec:
   sourceRef:
     kind: GitRepository
     name: template-dns-record
-  path: "./"
+  path: "./configuration"
   prune: true
   targetNamespace: crossplane-system
