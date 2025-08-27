@@ -1,27 +1,28 @@
-# DNS Record Template
+---
+# DNS Record Configuration Package
 # Provides XRD and Composition for DNS record management
----
-apiVersion: source.toolkit.fluxcd.io/v1
-kind: GitRepository
+apiVersion: pkg.crossplane.io/v1
+kind: Configuration
 metadata:
-  name: template-dns-record
-  namespace: flux-system
+  name: configuration-dns-record
+  namespace: crossplane-system
 spec:
-  interval: 5m0s
-  url: https://github.com/open-service-portal/template-dns-record
-  ref:
-    branch: main
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: template-dns-record
-  namespace: flux-system
-spec:
-  interval: 5m0s
-  sourceRef:
-    kind: GitRepository
-    name: template-dns-record
-  path: "./"
-  prune: true
-  targetNamespace: crossplane-system
+  package: ghcr.io/open-service-portal/configuration-dns-record:v1.0.0
+
+  # Package pull policy
+  # IfNotPresent: Only download if not in cache (recommended for production)
+  # Always: Check for updates on reconciliation (useful for development)
+  packagePullPolicy: IfNotPresent
+
+  # Revision activation policy
+  # Automatic: New revisions become active immediately (good for single-tenant)
+  # Manual: Requires manual activation (safer for multi-tenant production)
+  revisionActivationPolicy: Automatic
+
+  # Number of inactive revisions to keep
+  # Useful for rollback scenarios
+  revisionHistoryLimit: 3
+
+  # Skip dependency resolution
+  # Set to true if providers are pre-installed in the cluster
+  skipDependencyResolution: true
