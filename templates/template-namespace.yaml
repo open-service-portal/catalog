@@ -1,0 +1,8 @@
+# Namespace Template Registration
+# Purpose: Kubernetes namespace management with quotas, policies, and RBAC
+# Restaurant Analogy: "Table reservation system" - manages dedicated spaces
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - https://github.com/open-service-portal/template-namespace/xrd.yaml
+  - https://github.com/open-service-portal/template-namespace/composition.yaml

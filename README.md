@@ -30,9 +30,21 @@ catalog/
 All template repositories must follow the pattern: `template-<resource-type>`
 
 Examples:
-- `template-dns-record`
-- `template-postgres-db`
-- `template-kubernetes-app`
+- `template-dns-record` - DNS record management
+- `template-cloudflare-dnsrecord` - Cloudflare DNS integration
+- `template-namespace` - Kubernetes namespace provisioning
+- `template-whoami` - Demo application deployment
+- `template-whoami-service` - Service composition example
+
+## Current Templates
+
+| Template | Description | Resources Created |
+|----------|-------------|-------------------|
+| `template-namespace` | Kubernetes namespace management | Namespace, ResourceQuota, NetworkPolicy, RBAC |
+| `template-dns-record` | DNS record management (mock) | DNS A/CNAME records for local testing |
+| `template-cloudflare-dnsrecord` | Cloudflare DNS integration | Real DNS records in Cloudflare zones |
+| `template-whoami` | Demo application | Deployment, Service, Ingress |
+| `template-whoami-service` | Service composition | Combines namespace + whoami app |
 
 ## How It Works
 
