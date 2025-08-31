@@ -1,27 +1,33 @@
 # Cloudflare DNS Record Template
 # Provides real DNS record management in Cloudflare
+# Deployed via OCI Configuration package from GitHub Container Registry
 ---
-apiVersion: source.toolkit.fluxcd.io/v1
-kind: GitRepository
+apiVersion: pkg.crossplane.io/v1
+kind: Configuration
 metadata:
-  name: template-cloudflare-dnsrecord
-  namespace: flux-system
+  name: configuration-cloudflare-dnsrecord
+  namespace: crossplane-system
+  annotations:
+    meta.crossplane.io/description: "Manage real DNS records in Cloudflare"
+    meta.crossplane.io/maintainer: "Open Service Portal Team"
+    meta.crossplane.io/source: "github.com/open-service-portal/template-cloudflare-dnsrecord"
 spec:
-  interval: 5m0s
-  url: https://github.com/open-service-portal/template-cloudflare-dnsrecord
-  ref:
-    branch: main
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: template-cloudflare-dnsrecord
-  namespace: flux-system
-spec:
-  interval: 5m0s
-  sourceRef:
-    kind: GitRepository
-    name: template-cloudflare-dnsrecord
-  path: "./"
-  prune: true
-  targetNamespace: crossplane-system
+  package: ghcr.io/open-service-portal/configuration-cloudflare-dnsrecord:v1.0.1
+  
+  # Package pull policy
+  # IfNotPresent: Only download if not in cache (recommended for production)
+  # Always: Check for updates on reconciliation (useful for development)
+  packagePullPolicy: IfNotPresent
+  
+  # Revision activation policy
+  # Automatic: New revisions become active immediately (good for single-tenant)
+  # Manual: Requires manual activation (safer for multi-tenant production)
+  revisionActivationPolicy: Automatic
+  
+  # Number of inactive revisions to keep
+  # Useful for rollback scenarios
+  revisionHistoryLimit: 3
+  
+  # Skip dependency resolution
+  # Set to true since providers are pre-installed in the cluster
+  skipDependencyResolution: true
