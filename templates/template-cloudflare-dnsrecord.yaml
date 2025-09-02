@@ -1,5 +1,6 @@
 # Cloudflare DNS Record Template
-# Provides real DNS record management in Cloudflare
+# Provides real DNS record management via External-DNS
+# Breaking Change in v2.0.0: Migrated from provider-cloudflare to External-DNS
 # Deployed via OCI Configuration package from GitHub Container Registry
 ---
 apiVersion: pkg.crossplane.io/v1
@@ -8,11 +9,12 @@ metadata:
   name: configuration-cloudflare-dnsrecord
   namespace: crossplane-system
   annotations:
-    meta.crossplane.io/description: "Manage real DNS records in Cloudflare"
+    meta.crossplane.io/description: "Manage DNS records via External-DNS with namespace isolation"
     meta.crossplane.io/maintainer: "Open Service Portal Team"
     meta.crossplane.io/source: "github.com/open-service-portal/template-cloudflare-dnsrecord"
+    meta.crossplane.io/breaking-change: "v2.0.0 - Requires External-DNS instead of provider-cloudflare"
 spec:
-  package: ghcr.io/open-service-portal/configuration-cloudflare-dnsrecord:v1.0.1
+  package: ghcr.io/open-service-portal/configuration-cloudflare-dnsrecord:v2.0.0
   
   # Package pull policy
   # IfNotPresent: Only download if not in cache (recommended for production)
