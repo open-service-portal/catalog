@@ -14,7 +14,7 @@ metadata:
     meta.crossplane.io/source: "github.com/open-service-portal/template-cloudflare-dnsrecord"
     meta.crossplane.io/breaking-change: "v2.0.0 - Requires External-DNS instead of provider-cloudflare"
 spec:
-  package: ghcr.io/open-service-portal/configuration-cloudflare-dnsrecord:v2.0.0
+  package: ghcr.io/open-service-portal/configuration-cloudflare-dnsrecord:v2.0.1
   
   # Package pull policy
   # IfNotPresent: Only download if not in cache (recommended for production)
