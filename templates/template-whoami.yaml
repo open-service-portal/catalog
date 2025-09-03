@@ -1,33 +1,14 @@
-# WhoAmI Application Template
-# Provides a simple demo application with automatic domain configuration
-# Deployed via OCI Configuration package from GitHub Container Registry
 ---
+# WhoAmI Configuration Package
+# Provides XRD and Composition for demo application deployment
 apiVersion: pkg.crossplane.io/v1
 kind: Configuration
 metadata:
   name: configuration-whoami
   namespace: crossplane-system
-  annotations:
-    meta.crossplane.io/description: "Simple demo application with automatic domain configuration"
-    meta.crossplane.io/maintainer: "Open Service Portal Team"
-    meta.crossplane.io/source: "github.com/open-service-portal/template-whoami"
 spec:
-  package: ghcr.io/open-service-portal/configuration-whoami:v1.0.2
-  
-  # Package pull policy
-  # IfNotPresent: Only download if not in cache (recommended for production)
-  # Always: Check for updates on reconciliation (useful for development)
+  package: ghcr.io/open-service-portal/configuration-whoami:v1.0.3
   packagePullPolicy: IfNotPresent
-  
-  # Revision activation policy
-  # Automatic: New revisions become active immediately (good for single-tenant)
-  # Manual: Requires manual activation (safer for multi-tenant production)
   revisionActivationPolicy: Automatic
-  
-  # Number of inactive revisions to keep
-  # Useful for rollback scenarios
   revisionHistoryLimit: 3
-  
-  # Skip dependency resolution
-  # Set to true since providers are pre-installed in the cluster
   skipDependencyResolution: true
