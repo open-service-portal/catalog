@@ -107,6 +107,13 @@ jobs:
           git config --global user.name '${{ needs.prepare.outputs.app-slug }}[bot]'
           git config --global user.email '${{ needs.prepare.outputs.user-id }}+${{ needs.prepare.outputs.app-slug }}[bot]@users.noreply.github.com'
 
+      - name: Install Kustomize
+        if: needs.prepare.outputs.action == 'add'
+        run: |
+          curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" | bash
+          sudo mv kustomize /usr/local/bin/
+          kustomize version
+
       - name: Generate catalog entry
         id: catalog-entry
         run: |
@@ -146,6 +153,15 @@ jobs:
           
           echo "📝 Catalog entry written to ${CATALOG_FILE}"
 
+      - name: Update kustomization.yaml for new package
+        if: needs.prepare.outputs.action == 'add'
+        run: |
+          # Add the new template to kustomization.yaml using kustomize
+          TEMPLATE_PATH="templates/${{ inputs.package-name }}.yaml"
+          
+          echo "📝 Adding ${TEMPLATE_PATH} to kustomization.yaml"
+          kustomize edit add resource ${TEMPLATE_PATH}
+
       - name: Create Branch and Stage Changes
         id: prepare-commit
         run: |
@@ -160,6 +176,11 @@ jobs:
           
           git checkout -b ${BRANCH_NAME}
           git add templates/${{ inputs.package-name }}.yaml
+          
+          # Also add kustomization.yaml if it was modified (for new packages)
+          if [ "${{ needs.prepare.outputs.action }}" = "add" ]; then
+            git add kustomization.yaml
+          fi
           
           # Check if there are actual changes
           if git diff --cached --quiet; then
