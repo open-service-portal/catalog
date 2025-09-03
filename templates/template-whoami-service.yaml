@@ -1,14 +1,34 @@
 ---
-# WhoAmI Service Configuration Package  
-# Provides composite service with app + DNS
+# WhoAmI Service Configuration Package
+# Provides composite service with application deployment + DNS configuration
+# This is a "composition of compositions" that bundles WhoAmI app with DNS records
 apiVersion: pkg.crossplane.io/v1
 kind: Configuration
 metadata:
   name: configuration-whoami-service
   namespace: crossplane-system
+  annotations:
+    meta.crossplane.io/description: "Composite service bundling WhoAmI application with automatic DNS configuration"
+    meta.crossplane.io/maintainer: "Open Service Portal Team"
+    meta.crossplane.io/source: "github.com/open-service-portal/template-whoami-service"
+    meta.crossplane.io/depends-on: "configuration-whoami,configuration-cloudflare-dnsrecord"
 spec:
   package: ghcr.io/open-service-portal/configuration-whoami-service:v1.0.3
+  
+  # Package pull policy
+  # IfNotPresent: Only download if not in cache (recommended for production)
+  # Always: Check for updates on reconciliation (useful for development)
   packagePullPolicy: IfNotPresent
+  
+  # Revision activation policy
+  # Automatic: New revisions become active immediately (good for single-tenant)
+  # Manual: Requires manual activation (safer for multi-tenant production)
   revisionActivationPolicy: Automatic
+  
+  # Number of inactive revisions to keep
+  # Useful for rollback scenarios
   revisionHistoryLimit: 3
+  
+  # Skip dependency resolution
+  # Set to true since providers are pre-installed in the cluster
   skipDependencyResolution: true
