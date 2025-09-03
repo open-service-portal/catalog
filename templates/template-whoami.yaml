@@ -1,7 +1,7 @@
+---
 # WhoAmI Application Template
 # Provides a simple demo application with automatic domain configuration
 # Deployed via OCI Configuration package from GitHub Container Registry
----
 apiVersion: pkg.crossplane.io/v1
 kind: Configuration
 metadata:
@@ -12,7 +12,7 @@ metadata:
     meta.crossplane.io/maintainer: "Open Service Portal Team"
     meta.crossplane.io/source: "github.com/open-service-portal/template-whoami"
 spec:
-  package: ghcr.io/open-service-portal/configuration-whoami:v1.0.2
+  package: ghcr.io/open-service-portal/configuration-whoami:v1.0.3
   
   # Package pull policy
   # IfNotPresent: Only download if not in cache (recommended for production)

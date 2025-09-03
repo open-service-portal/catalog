@@ -1,18 +1,19 @@
-# WhoAmI Service Template  
-# Composition of compositions - combines WhoAmI app with DNS configuration
-# Deployed via OCI Configuration package from GitHub Container Registry
 ---
+# WhoAmI Service Configuration Package
+# Provides composite service with application deployment + DNS configuration
+# This is a "composition of compositions" that bundles WhoAmI app with DNS records
 apiVersion: pkg.crossplane.io/v1
 kind: Configuration
 metadata:
   name: configuration-whoami-service
   namespace: crossplane-system
   annotations:
-    meta.crossplane.io/description: "Complete service with WhoAmI app deployment and DNS configuration"
+    meta.crossplane.io/description: "Composite service bundling WhoAmI application with automatic DNS configuration"
     meta.crossplane.io/maintainer: "Open Service Portal Team"
     meta.crossplane.io/source: "github.com/open-service-portal/template-whoami-service"
+    meta.crossplane.io/depends-on: "configuration-whoami,configuration-cloudflare-dnsrecord"
 spec:
-  package: ghcr.io/open-service-portal/configuration-whoami-service:v1.0.2
+  package: ghcr.io/open-service-portal/configuration-whoami-service:v1.0.3
   
   # Package pull policy
   # IfNotPresent: Only download if not in cache (recommended for production)
