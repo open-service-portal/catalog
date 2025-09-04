@@ -286,6 +286,12 @@ jobs:
           
           # Create PR using action-specific template
           PR_TITLE="${PR_PREFIX} ${PACKAGE_NAME} ${VERSION}"
+          
+          # Add source repository information to the environment for the template
+          # Since this is a reusable workflow, we link to the source repository
+          export SOURCE_REPO="${{ inputs.organisation }}/${{ inputs.package-name }}"
+          export SOURCE_REPO_URL="${{ github.server_url }}/${{ inputs.organisation }}/${{ inputs.package-name }}"
+          
           PR_BODY=$(envsubst < .github/PULL_REQUEST_TEMPLATE/catalog-${{ needs.prepare.outputs.action }}.md)
           
           PR_URL=$(gh pr create \
