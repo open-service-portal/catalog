@@ -58,8 +58,9 @@ jobs:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
 
       - name: Checkout Catalog Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
+          repository: open-service-portal/catalog
           token: ${{ steps.app-token.outputs.token }}
           fetch-depth: 0
 
@@ -111,8 +112,9 @@ jobs:
           repositories: catalog
       
       - name: Checkout Catalog Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
+          repository: open-service-portal/catalog
           token: ${{ steps.app-token.outputs.token }}
           fetch-depth: 0
 
@@ -266,8 +268,9 @@ jobs:
           repositories: catalog
       
       - name: Checkout Catalog Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
+          repository: open-service-portal/catalog
           token: ${{ steps.app-token.outputs.token }}
           ref: ${{ needs.update-catalog.outputs.branch }}
 
