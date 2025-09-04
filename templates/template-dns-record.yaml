@@ -1,13 +1,13 @@
 ---
-# DNS Record Configuration Package
-# Provides XRD and Composition for DNS record management
+# Configuration Package: template-dns-record
+# Registry: ghcr.io/open-service-portal
 apiVersion: pkg.crossplane.io/v1
 kind: Configuration
 metadata:
-  name: configuration-dns-record
+  name: template-dns-record
   namespace: crossplane-system
 spec:
-  package: ghcr.io/open-service-portal/configuration-dns-record:v1.0.7
+  package: ghcr.io/open-service-portal/template-dns-record:v1.0.8
 
   # Package pull policy
   # IfNotPresent: Only download if not in cache (recommended for production)
