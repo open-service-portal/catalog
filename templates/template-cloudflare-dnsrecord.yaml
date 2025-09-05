@@ -1,6 +1,7 @@
 # Cloudflare DNS Record Template
 # Provides real DNS record management via External-DNS
 # Breaking Change in v2.0.0: Migrated from provider-cloudflare to External-DNS
+# Fix in v2.0.2: CloudflareDNSRecord XRs now correctly show as Ready
 # Deployed via OCI Configuration package from GitHub Container Registry
 ---
 apiVersion: pkg.crossplane.io/v1
@@ -14,7 +15,7 @@ metadata:
     meta.crossplane.io/source: "github.com/open-service-portal/template-cloudflare-dnsrecord"
     meta.crossplane.io/breaking-change: "v2.0.0 - Requires External-DNS instead of provider-cloudflare"
 spec:
-  package: ghcr.io/open-service-portal/configuration-cloudflare-dnsrecord:v2.0.1
+  package: ghcr.io/open-service-portal/configuration-cloudflare-dnsrecord:v2.0.2
   
   # Package pull policy
   # IfNotPresent: Only download if not in cache (recommended for production)
