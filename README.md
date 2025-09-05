@@ -6,14 +6,31 @@ This repository serves as the central catalog for Crossplane templates.
 - Central registry of all template-* repositories
 - Managed by Flux for automatic synchronization
 - Each template provides XRDs and Compositions for infrastructure
+- Defines clear ownership boundaries for platform resources
 
-## Structure
+## Ownership Model
+
+Resources in this catalog follow a clear ownership structure based on GitHub Teams:
+
+- **Core Infrastructure** → `group:default/platform-team`
+  - Namespaces, DNS, Clusters, Networking, Security
+  - Foundation that all services build upon
+  
+- **Application Services** → `group:default/service-provider`
+  - Business applications, APIs, Databases
+  - Services that use core infrastructure
+
+For detailed ownership guidelines, see [Ownership Guidelines](https://github.com/open-service-portal/portal-workspace/blob/main/docs/ownership-guidelines.md)
+
+## Repository Structure
 
 ```
 catalog/
-├── templates/        # Individual template repository definitions
-├── kustomization.yaml  # Kustomize configuration for Flux
-└── README.md        # This file
+├── templates/              # Template repository definitions
+│   ├── core/              # Platform team owned (future)
+│   └── services/          # Service provider owned (future)
+├── kustomization.yaml     # Kustomize configuration for Flux
+└── README.md             # This file
 ```
 
 ## Adding a Template
@@ -38,13 +55,13 @@ Examples:
 
 ## Current Templates
 
-| Template | Description | Resources Created |
-|----------|-------------|-------------------|
-| `template-namespace` | Kubernetes namespace management | Namespace, ResourceQuota, NetworkPolicy, RBAC |
-| `template-dns-record` | DNS record management (mock) | DNS A/CNAME records for local testing |
-| `template-cloudflare-dnsrecord` | Cloudflare DNS integration | Real DNS records in Cloudflare zones |
-| `template-whoami` | Demo application | Deployment, Service, Ingress |
-| `template-whoami-service` | Service composition | Combines namespace + whoami app |
+| Template | Description | Owner | Resources Created |
+|----------|-------------|-------|-------------------|
+| `template-namespace` | Kubernetes namespace management | platform-team | Namespace, ResourceQuota, NetworkPolicy, RBAC |
+| `template-dns-record` | DNS record management (mock) | platform-team | DNS A/CNAME records for local testing |
+| `template-cloudflare-dnsrecord` | Cloudflare DNS integration | platform-team | Real DNS records in Cloudflare zones |
+| `template-whoami` | Demo application | service-provider | Deployment, Service, Ingress |
+| `template-whoami-service` | Service composition | service-provider | Combines namespace + whoami app |
 
 ## How It Works
 
