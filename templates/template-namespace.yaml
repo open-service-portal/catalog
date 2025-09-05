@@ -1,13 +1,14 @@
 ---
 # Namespace Configuration Package
 # Provides XRD and Composition for Kubernetes namespace management
+# BREAKING CHANGE v3.0.0: Simplified API - only namespace name required
 apiVersion: pkg.crossplane.io/v1
 kind: Configuration
 metadata:
   name: configuration-namespace
   namespace: crossplane-system
 spec:
-  package: ghcr.io/open-service-portal/configuration-namespace:v2.2.0
+  package: ghcr.io/open-service-portal/configuration-namespace:v3.0.0
 
   # Package pull policy
   # IfNotPresent: Only download if not in cache (recommended for production)
