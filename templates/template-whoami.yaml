@@ -12,7 +12,7 @@ metadata:
     meta.crossplane.io/maintainer: "Open Service Portal Team"
     meta.crossplane.io/source: "github.com/open-service-portal/template-whoami"
 spec:
-  package: ghcr.io/open-service-portal/configuration-whoami:v1.0.3
+  package: ghcr.io/open-service-portal/configuration-whoami:v1.0.4
   
   # Package pull policy
   # IfNotPresent: Only download if not in cache (recommended for production)

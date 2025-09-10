@@ -7,7 +7,7 @@ metadata:
   name: configuration-namespace
   namespace: crossplane-system
 spec:
-  package: ghcr.io/open-service-portal/configuration-namespace:v2.0.2
+  package: ghcr.io/open-service-portal/configuration-namespace:v3.2.0
 
   # Package pull policy
   # IfNotPresent: Only download if not in cache (recommended for production)

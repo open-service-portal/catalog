@@ -13,7 +13,7 @@ metadata:
     meta.crossplane.io/source: "github.com/open-service-portal/template-whoami-service"
     meta.crossplane.io/depends-on: "configuration-whoami,configuration-cloudflare-dnsrecord"
 spec:
-  package: ghcr.io/open-service-portal/configuration-whoami-service:v1.0.3
+  package: ghcr.io/open-service-portal/configuration-whoami-service:v2.0.2
   
   # Package pull policy
   # IfNotPresent: Only download if not in cache (recommended for production)
