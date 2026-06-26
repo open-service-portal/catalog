@@ -1,0 +1,28 @@
+---
+# Valkey Configuration Package
+# Registry: ghcr.io/open-service-portal
+apiVersion: pkg.crossplane.io/v1
+kind: Configuration
+metadata:
+  name: configuration-valkey
+  namespace: crossplane-system
+spec:
+  package: ghcr.io/open-service-portal/configuration-valkey:v0.1.0
+
+  # Package pull policy
+  # IfNotPresent: Only download if not in cache (recommended for production)
+  # Always: Check for updates on reconciliation (useful for development)
+  packagePullPolicy: IfNotPresent
+
+  # Revision activation policy
+  # Automatic: New revisions become active immediately (good for single-tenant)
+  # Manual: Requires manual activation (safer for multi-tenant production)
+  revisionActivationPolicy: Automatic
+
+  # Number of inactive revisions to keep
+  # Useful for rollback scenarios
+  revisionHistoryLimit: 3
+
+  # Skip dependency resolution
+  # Set to true since providers are pre-installed in the cluster
+  skipDependencyResolution: true
