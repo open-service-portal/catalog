@@ -8,3 +8,4 @@ resources:
   - templates/template-cloudflare-dnsrecord.yaml
   - templates/template-whoami-service.yaml
   - templates/template-namespace.yaml
+  - templates/template-valkey.yaml
