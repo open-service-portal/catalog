@@ -1,0 +1,15 @@
+---
+# ExposedService Configuration Package
+# Registry: ghcr.io/open-service-portal
+# Publishes an in-cluster Service over HTTPS via Gateway API (HTTPRoute); TLS + DNS via platform.
+apiVersion: pkg.crossplane.io/v1
+kind: Configuration
+metadata:
+  name: configuration-exposed-service
+  namespace: crossplane-system
+spec:
+  package: ghcr.io/open-service-portal/configuration-exposed-service:v0.1.0
+  packagePullPolicy: IfNotPresent
+  revisionActivationPolicy: Automatic
+  revisionHistoryLimit: 3
+  skipDependencyResolution: true
